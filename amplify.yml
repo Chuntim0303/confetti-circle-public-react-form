@@ -3,9 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
-        # Force React 18 for build
-        - npm install react@18 react-dom@18
-        # Then install the rest, ignoring peer dependency conflicts
+        # Overwrite React version in package.json to force Amplify to use React 18
+        - sed -i 's/"react": "[^"]*"/"react": "18.3.1"/' package.json
+        - sed -i 's/"react-dom": "[^"]*"/"react-dom": "18.3.1"/' package.json
         - npm ci --legacy-peer-deps
     build:
       commands:
@@ -18,4 +18,3 @@ frontend:
     paths:
       - node_modules/**/*
       - .npm/**/*
-
