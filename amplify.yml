@@ -6,6 +6,9 @@ frontend:
         # Overwrite React version in package.json to force Amplify to use React 18
         - sed -i 's/"react": "[^"]*"/"react": "18.3.1"/' package.json
         - sed -i 's/"react-dom": "[^"]*"/"react-dom": "18.3.1"/' package.json
+        # Clear npm cache to avoid old React versions sneaking in
+        - npm cache clean --force
+        # Install dependencies ignoring peer conflicts
         - npm ci --legacy-peer-deps
     build:
       commands:
